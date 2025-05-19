@@ -89,3 +89,4 @@ target/
 
 # myenv
 /myenv/
+/run_information.json
