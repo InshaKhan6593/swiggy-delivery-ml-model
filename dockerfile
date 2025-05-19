@@ -23,4 +23,4 @@ COPY ./run_information.json ./
 EXPOSE 8000
 
 # Run the file using command
-CMD [ "python","./app.py" ]
+CMD [ "python","app.py" ]
