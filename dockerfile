@@ -8,10 +8,10 @@ RUN apt-get update && apt-get install -y libgomp1
 WORKDIR /app
 
 # copy the requirements file
-COPY requirements-dockers.txt ./
+COPY requirements-ci-cd.txt ./
 
 # install the packages
-RUN pip install -r requirements-dockers.txt
+RUN pip install -r requirements-ci-cd.txt
 RUN pip install streamlit
 # copy the app contents
 COPY app.py ./
