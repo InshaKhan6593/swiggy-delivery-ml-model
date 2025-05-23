@@ -12,7 +12,7 @@ COPY requirements-dockers.txt ./
 
 # install the packages
 RUN pip install -r requirements-dockers.txt
-RUN pip intsall streamlit
+RUN pip install streamlit
 # copy the app contents
 COPY app.py ./
 COPY ./models/preprocessor.joblib ./models/preprocessor.joblib
