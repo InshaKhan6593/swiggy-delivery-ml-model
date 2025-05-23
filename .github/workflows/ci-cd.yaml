@@ -53,8 +53,8 @@ jobs:
 
       - name: Log in to AWS ECR
         run: |
-          aws ecr get-login-password --region eu-north-1 | /
-          docker login --username AWS / 
+          aws ecr get-login-password --region eu-north-1 | \
+          docker login --username AWS \
           --password-stdin 476114157013.dkr.ecr.eu-north-1.amazonaws.com 
 
       - name: Build Docker Image
