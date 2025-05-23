@@ -103,7 +103,7 @@ except Exception as e:
     sys.exit(1)
 
 # Define stage
-stage = "Staging"
+stage = "Production"
 
 # Load model from MLflow registry
 model_path = f"models:/{model_name}/{stage}"
