@@ -96,10 +96,6 @@ def data_cleaning(data: pd.DataFrame):
             city_type = lambda x: x['city_type'].str.rstrip().str.lower(),
             # multiple deliveries column
             multiple_deliveries = lambda x: x['multiple_deliveries'].astype(float))
-            # target column modifications
-            # time_taken = lambda x: (x['time_taken']
-            #                         .str.replace("(min) ","")
-            #                         .astype(int)))
         .drop(columns=["order_time","order_picked_time"])
     )
     
