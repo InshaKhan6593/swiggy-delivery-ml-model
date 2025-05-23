@@ -7,7 +7,7 @@ root_path = Path(__file__).parent.parent
 data_path = root_path / "data" / "raw" / "swiggy.csv"
 
 # prediction endpoint
-predict_url = "http://ec2-13-51-177-101.eu-north-1.compute.amazonaws.com/predict"
+predict_url = "http://ec2-13-60-80-24.eu-north-1.compute.amazonaws.com/predict"
 
 # sample row for testing the endpoint
 sample_row = pd.read_csv(data_path).dropna().sample(1)
