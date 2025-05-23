@@ -85,7 +85,7 @@ jobs:
             docker pull 476114157013.dkr.ecr.eu-north-1.amazonaws.com/inshakhan_ecr:latest
             docker stop swiggy_app || true
             docker rm swiggy_app || true
-            docker run -d --name swiggy_app -p 80:8000 -e DAGSHUB_USER_TOKEN=${{ secrets.DAGSHUB_TOKEN }} \
+            docker run -d --name swiggy_app -p 80:8000 -p 8501:8501 -e DAGSHUB_USER_TOKEN=${{ secrets.DAGSHUB_TOKEN }} \
             476114157013.dkr.ecr.eu-north-1.amazonaws.com/inshakhan_ecr:latest
             
     
