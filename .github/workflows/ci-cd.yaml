@@ -71,7 +71,7 @@ jobs:
 
       - name: Deploy to EC2 
         if: success()
-        uses: appleboy/ssh-actions/@v0.1.5
+        uses: appleboy/ssh-action/@v0.1.5
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{secrets.EC2_USER_NAME }}
