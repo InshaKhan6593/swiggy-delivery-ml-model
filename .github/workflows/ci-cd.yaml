@@ -1,0 +1,50 @@
+name: CI-CD
+
+on: push
+
+jobs:
+  Model Testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup-Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependcies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-noth-1
+
+      - name: DVC Pull
+        run: |
+          dvc pull
+
+      - name: Test Model Registry
+        env:
+          DAGSHUB_USER_TOKEN: ${{ secrets.DAGSHUB_USER_TOKEN }}
+        run: |
+          pytest tests/test_model_registry.py
+
+      - name: Test Model Performance
+        if: success()
+        run: |
+          pytest tests/test_model_performance.py
+
+      - name: Promote Model
+        if: success()
+        run: |
+          python scripts/promote_model_to_prod.py
+
+    
