@@ -68,4 +68,24 @@ jobs:
       - name: Push Docker Image to ECR
         run: |
           docker push 476114157013.dkr.ecr.eu-north-1.amazonaws.com/inshakhan_ecr:latest
+
+      - name: Deploy to EC2 
+        if: success()
+        uses: appleboy/ssh-actions/@v0.1.5
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{secrets.EC2_USER_NAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          scripts: |
+            aws configure set aws-access-key-id ${{ secrets.AWS_ACCESS_KEY_ID }} 
+            aws configure set aws-secret-access-key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws configure set default.region eu-north-1
+            aws ecr get-login-password --region eu-north-1 | \
+            docker login --username AWS --password-stdin 476114157013.dkr.ecr.eu-north-1.amazonaws.com
+            docker pull 476114157013.dkr.ecr.eu-north-1.amazonaws.com/inshakhan_ecr:latest
+            docker stop swiggy_app || true
+            docker rm swiggy_app || true
+            docker run --name swiggy_app -p 80:8000 -e DAGSHUB_USER_TOKEN=${{ secrets.DAGSHUB_TOKEN }} \
+            476114157013.dkr.ecr.eu-north-1.amazonaws.com/inshakhan_ecr:latest
+            
     

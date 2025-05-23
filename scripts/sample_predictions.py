@@ -24,8 +24,14 @@ for i in range(3):
 
     print("The status code for response is", response.status_code)
 
-    if response.status_code == 200:
-      prediction = response.json()["Predicted_Delivery_Time"]
-      print(f"The prediction value by the API is {float(prediction):.2f} min")
+if response.status_code == 200:
+    response_json = response.json()
+    print("Full response JSON:", response_json)  # << Add this line to debug
+
+    if "Predicted_Delivery_Time" in response_json:
+        prediction = response_json["Predicted_Delivery_Time"]
+        print(f"The prediction value by the API is {float(prediction):.2f} min")
     else:
-      print("Error:", response.status_code)
+        print("Prediction key missing in response:", response_json)
+else:
+    print("Error:", response.status_code)
