@@ -76,7 +76,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{secrets.EC2_USER_NAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          scripts: |
+          script: |
             aws configure set aws-access-key-id ${{ secrets.AWS_ACCESS_KEY_ID }} 
             aws configure set aws-secret-access-key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws configure set default.region eu-north-1
