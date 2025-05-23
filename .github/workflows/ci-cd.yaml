@@ -51,4 +51,21 @@ jobs:
         run: |
           python scripts/promote_model_to_prod.py
 
+      - name: Log in to AWS ECR
+        run: |
+          aws ecr get-login-password --region eu-north-1 | /
+          docker login --username AWS / 
+          --password-stdin 476114157013.dkr.ecr.eu-north-1.amazonaws.com 
+
+      - name: Build Docker Image
+        run: |
+          docker build -t inshakhan_ecr .
+
+      - name: Tag Docker Image
+        run: |
+          docker tag inshakhan_ecr:latest 476114157013.dkr.ecr.eu-north-1.amazonaws.com/inshakhan_ecr:latest          
+      
+      - name: Push Docker Image to ECR
+        run: |
+          docker push 476114157013.dkr.ecr.eu-north-1.amazonaws.com/inshakhan_ecr:latest
     
