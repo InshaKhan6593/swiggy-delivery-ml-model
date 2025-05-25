@@ -8,10 +8,10 @@ import joblib
 import pandas as pd
 from sklearn.metrics import mean_absolute_error
 
-dagshub.init(repo_owner='speedyskill', repo_name='swiggy-delivery-ml-model', mlflow=True)
+dagshub.init(repo_owner='InshaKhan6593', repo_name='swiggy-delivery-ml-model', mlflow=True)
 
 # set the mlflow tracking server
-mlflow.set_tracking_uri("https://dagshub.com/speedyskill/swiggy-delivery-ml-model.mlflow")
+mlflow.set_tracking_uri("https://dagshub.com/InshaKhan6593/swiggy-delivery-ml-model.mlflow")
 
 
 def load_model_information(file_path):
