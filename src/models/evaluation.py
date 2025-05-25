@@ -1,3 +1,4 @@
+import dagshub.auth
 import pandas as pd
 import joblib
 import logging
@@ -11,10 +12,17 @@ import json
 
 # initialize dagshub
 import dagshub
-import dagshub
+import os
+
+dagshub_token = os.getenv("DAGSHUB_USER_TOKEN")
+if not dagshub_token:
+    raise ValueError("DAGSHUB_TOKEN environment variable not set")
+
+print(os.getenv("DAGSHUB_TOKEN"))
+
 dagshub.init(repo_owner='InshaKhan6593', repo_name='swiggy-delivery-ml-model', mlflow=True)
 
-
+dagshub.auth.add_app_token(dagshub_token)
 # set the mlflow tracking server
 mlflow.set_tracking_uri("https://dagshub.com/InshaKhan6593/swiggy-delivery-ml-model.mlflow")
 
